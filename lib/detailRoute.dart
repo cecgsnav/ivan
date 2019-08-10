@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ivan/data.dart';
 
+import 'dataUtil.dart';
+
 class DetailRoute extends StatelessWidget {
   final Data data;
 
@@ -10,19 +12,27 @@ class DetailRoute extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Detail"),
-      ),
-      body: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-          Text(data.place),
-          Text(data.address),
-          Text(data.city),
-          Text("${data.value.toString()}/150")
-        ])
-      ),
-    );
+        appBar: AppBar(
+          title: Text("Detail"),
+        ),
+        body: ListView(
+          children: <Widget>[
+            Card(child: ListTile(
+              leading: Text("${data.value}/150", style: TextStyle(color: data.color, fontWeight: FontWeight.bold),),
+              title: Text(data.place, style: Theme.of(context).textTheme.title,))
+            ),
+            Card(
+              child: ListTile(
+                title: Text(data.address),
+                subtitle: Text(data.city),
+              ),
+            ),
+            Card(
+              child: ListTile(
+                title: Text('The air quality is ${DataUtil().quality(data.value)}'),
+              )
+            )
+          ],
+        ));
   }
 }

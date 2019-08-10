@@ -1,5 +1,6 @@
-import 'package:ivan/colorUtil.dart';
 import 'package:flutter/material.dart';
+
+import 'dataUtil.dart';
 
 class DataResponse {
   final int statusCode;
@@ -32,7 +33,7 @@ class Data {
 
   factory Data.fromJson(Map<String, dynamic> json) {
     var color = "grey";
-    var value = 0;
+    var value = -1;
     if (json['caql']['current'] != null) {
       color = json['caql']['current']['color'];
       value = json['caql']['current']['value'];
@@ -43,7 +44,7 @@ class Data {
       json['city'],
       json['address'],
       json['place'],
-      ColorUtil().build(color),
+      DataUtil().build(color),
       value
     );
   }

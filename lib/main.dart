@@ -48,34 +48,43 @@ class _MainAppPageState extends State<MainAppPage> {
             itemCount: widgets.length,
             itemBuilder: (BuildContext context, int position) {
               return GestureDetector(
-                child: getRow(position), 
-                onTap: () {
-                  Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => DetailRoute(data: widgets[position])));
-                });
+                  child: getRow(position),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                DetailRoute(data: widgets[position])));
+                  });
             }));
   }
 
   Widget getRow(int i) {
     return Container(
+        width: MediaQuery.of(context).size.width,
         padding: EdgeInsets.all(10.0),
         child: Row(
           children: [
             Padding(
                 padding: EdgeInsets.all(10),
-                child: Column(children: [
-                  Text("●", 
-                  style: TextStyle(
-                    color: widgets[i].color, 
-                    fontWeight: FontWeight.bold)),
-                  Text(widgets[i].monitorId.toString())
+                child: CircleAvatar(
+                    backgroundColor: widgets[i].color,
+                    child: Text(
+                      "#${widgets[i].monitorId.toString()}",
+                      style: TextStyle(color: Colors.white),
+                    ))),
+            Flexible(
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                  Text(widgets[i].address,
+                      style: Theme.of(context).textTheme.subhead,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1),
+                  Text(widgets[i].city,
+                      style: Theme.of(context).textTheme.caption)
                 ])),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(widgets[i].address, style: TextStyle(color: Colors.black87)),
-                Text(widgets[i].city, style: TextStyle(color: Colors.blueAccent))
-            ])
+            Divider(color: Colors.blueGrey)
           ],
         ));
   }
