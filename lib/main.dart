@@ -2,6 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Startup Name Generator',
+      title: 'Ivan',
       home: MainAppPage(),
     );
   }
@@ -35,7 +36,10 @@ class _MainAppPageState extends State<MainAppPage> {
   void initState() {
     super.initState();
 
-    loadData();
+    Timer.periodic(Duration(minutes: 5), (timer) {
+      loadData();
+    });
+
   }
 
   @override
