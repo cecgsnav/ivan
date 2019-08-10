@@ -36,6 +36,7 @@ class _MainAppPageState extends State<MainAppPage> {
   void initState() {
     super.initState();
 
+    loadData();
     Timer.periodic(Duration(minutes: 5), (timer) {
       loadData();
     });
